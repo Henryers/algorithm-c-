@@ -1,0 +1,10 @@
+{
+  "files.associations": {
+    "manifest.json": "jsonc",
+    "pages.json": "jsonc",
+    "xutility": "cpp",
+    "algorithm": "cpp",
+    "list": "cpp",
+    "vector": "cpp"
+  }
+}
