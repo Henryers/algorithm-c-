@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <string>
+#include <algorithm>
 #include <unordered_map>
 
 using namespace std;
@@ -19,10 +20,13 @@ public:
     {
       if (map.find(s[r]) != map.end())
       {
-        l = map[s[r]] + 1 > l ? map[s[r]] + 1 : l;
+        // 找到重复字符？如果在左边界里面就更新左边界，否则无需更新
+        // x b x [ x x x b ] 上一个在左边界的左侧，也就是左侧之外，无需更新
+        // x x x [ x b x b ] 这次就要更新了： x x x x b [ x b ]
+        l = max(map[s[r]] + 1, l);
       }
-      map[s.at(r)] = r;
-      res = res > r - l + 1 ? res : r - l + 1;
+      map[s[r]] = r;
+      res = max(res, r - l + 1);
       r++;
     }
     return res;
