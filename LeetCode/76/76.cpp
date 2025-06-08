@@ -12,7 +12,7 @@ class Solution
 public:
   string minWindow(string s, string t)
   {
-    int count = t.size(); // 记录找到的合法的字符个数
+    int count = t.size(); // 记录当前窗口还需要匹配的字符数量，最大值是子串长度，最小值为0
     // 用ASCII码记录原始子串t的词频表
     int arr[128]{};
     for (char c : t)
