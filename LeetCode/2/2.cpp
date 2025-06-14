@@ -22,20 +22,22 @@ class Solution
 public:
   ListNode *addTwoNumbers(ListNode *l1, ListNode *l2)
   {
-    ListNode *res = new ListNode(0);
-    ListNode *cur = res;
+    ListNode *dummy = new ListNode(0);
+    ListNode *cur = dummy;
     int add = 0;
     while (l1 != nullptr || l2 != nullptr || add == 1)
     {
-      int res1 = l1 != nullptr ? l1->val : 0;
-      int res2 = l2 != nullptr ? l2->val : 0;
-      int shang = (res1 + res2 + add) % 10;
-      add = (res1 + res2 + add) >= 10 ? 1 : 0;
-      cur->next = new ListNode(shang);
+      int a = l1 ? l1->val : 0;
+      int b = l2 ? l2->val : 0;
+      int res = (a + b + add) % 10;
+      add = (a + b + add) / 10;
+      cur->next = new ListNode(res);
       cur = cur->next;
-      l1 = l1 == nullptr ? l1 : l1->next;
-      l2 = l2 == nullptr ? l2 : l2->next;
+      if (l1)
+        l1 = l1->next;
+      if (l2)
+        l2 = l2->next;
     }
-    return res->next;
+    return dummy->next;
   }
 };
