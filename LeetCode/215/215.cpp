@@ -54,3 +54,52 @@ public:
         return quickselect(nums, 0, n - 1, n - k); // 升序排序，n-1最大，n-k第k大
     }
 };
+
+
+
+
+// 堆排序
+class Solution
+{
+public:
+    int findKthLargest(vector<int> &nums, int k)
+    {
+        int n = nums.size();
+        int dn = n;
+        buildMaxHeap(nums);
+        for (int i = n - 1; i >= n - k + 1; i--)
+        {
+            swap(nums[0], nums[i]); // 最后一个元素换到开头，做heapify
+            dn--;                   // 开头的最大值元素换到末尾，移除（外层的静态n大小不变）
+            heapify(nums, 0, dn);   // 此处由于移除了元素，数组大小是动态的dn
+        }
+        return nums[0];
+    }
+
+    // 构建大根堆
+    void buildMaxHeap(vector<int> &nums)
+    {
+        for (int i = nums.size() / 2 - 1; i >= 0; i--)
+        {
+            heapify(nums, i, nums.size());
+        }
+    }
+
+    // 当前节点i往下heapify
+    void heapify(vector<int> &nums, int i, int size)
+    {
+        int left = i * 2 + 1;
+        while (left < size)
+        {
+            // 左右节点选较大值
+            int larger = left + 1 < size && nums[left + 1] > nums[left] ? left + 1 : left;
+            // 和当前（父节点）比较，选最大值
+            int largest = nums[larger] > nums[i] ? larger : i;
+            if (largest == i)
+                break;                    // 你爸爸还是你爸爸
+            swap(nums[largest], nums[i]); // 完了，被篡位了
+            i = largest;
+            left = i * 2 + 1; // 当前节点（父节点）被打入冷宫，只要不越界，就可能还会再被打
+        }
+    }
+};
