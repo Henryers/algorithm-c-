@@ -8,6 +8,7 @@
     "vector": "cpp",
     "stack": "cpp",
     "queue": "cpp",
-    "utility": "cpp"
+    "utility": "cpp",
+    "iostream": "cpp"
   }
 }
