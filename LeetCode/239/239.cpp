@@ -1,5 +1,9 @@
 // 239.滑动窗口最大值
 
+/**
+ * onenote 上有逐步图解案例
+ */
+
 #include <iostream>
 #include <vector>
 #include <deque>
@@ -17,18 +21,19 @@ public:
     deque<int> deque;
     for (int i = 0; i < nums.size(); i++)
     {
-      // 窗口右侧的值太小，去掉，
-      while (!deque.empty() && nums[deque.back()] <= nums[i])
+      // 确保单调递减队列，队列中比当前nums[i]小的元素将被淘汰！
+      while (!deque.empty() && nums[deque.back()] < nums[i])
       {
         deque.pop_back();
       }
-      // 没事，这次就算不是最大的也加上去，
-      // 一是你不在这里加要在哪加？二是下一次循环时，它作为窗口最后一个不合格的元素也会被去掉！
+      // 添加当前元素
       deque.push_back(i);
-      // 再弹出左侧的节点   i-k [i-k+1, i]
-      if (deque.front() <= i - k)
+      // 单调队列可能满了，k+1那么大，最前面的元素要去除哦
+      if (deque.front() == i - k)
+      {
         deque.pop_front();
-      // 窗口形成后，加答案
+      }
+      // 窗口形成后，记录答案
       if (i >= k - 1)
       {
         res.push_back(nums[deque.front()]);
