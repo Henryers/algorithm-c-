@@ -25,7 +25,7 @@ public:
     ListNode *cur2 = list2;
     while (cur1 != nullptr || cur2 != nullptr)
     {
-      if (!cur2 || (cur1 && cur1->val <= cur2->val))
+      if (!cur2 || (cur1 && cur1->val <= cur2->val))  // 代码能少点，但是O(m+n)，每个数都要比较一次
       {
         cur->next = cur1; // 相当于头节点res的下一个是cur1节点（第一次）
         cur1 = cur1->next;

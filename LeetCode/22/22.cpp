@@ -14,21 +14,21 @@ public:
         return res;
     }
 
-    void dfs(string tmp, int restl, int restr){
-        if(restl > restr) return;
-        if(restl == 0){
-            for(int i = 0; i < restr; i++){
+    void dfs(string tmp, int restl, int restr) {
+        if (restl > restr) return;
+        if (restl == 0) {
+            for (int i = 0; i < restr; i++) {
                 tmp += ')';
             }
             res.push_back(tmp);
             return;
         }
         tmp += '(';
-        dfs(tmp, restl-1, restr);
+        dfs(tmp, restl - 1, restr);
         tmp.pop_back();
-        if (restl < restr){
+        if (restl < restr) {
             tmp += ')';
-            dfs(tmp, restl, restr-1);
+            dfs(tmp, restl, restr - 1);
             tmp.pop_back();
         }
     }
